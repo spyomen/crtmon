@@ -1,4 +1,4 @@
-module github.com/spyomen/ceye
+module github.com/spyomen/crtmon
 
 go 1.21
 
