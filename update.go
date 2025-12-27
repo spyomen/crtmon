@@ -19,7 +19,7 @@ func performUpdate() {
 	fmt.Println()
 	fmt.Println(highlightStyle.Render("checking for updates..."))
 
-	latest, found, err := selfupdate.DetectLatest("1hehaq/ceye")
+	latest, found, err := selfupdate.DetectLatest("coffinxp/crtmon")
 	if err != nil {
 		fmt.Printf("%s %s\n", errorStyle.Render("✗"), dimStyle.Render("error checking for updates: "+err.Error()))
 		fmt.Println()
@@ -66,6 +66,6 @@ func performUpdate() {
 
 	fmt.Printf("%s\n", successStyle.Render("done"))
 	fmt.Println()
-	fmt.Println(dimStyle.Render("  restart ceye to use the new version"))
+	fmt.Println(dimStyle.Render("  restart crtmon to use the new version"))
 	fmt.Println()
 }

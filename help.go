@@ -14,21 +14,21 @@ func displayHelp() {
 
 	printBanner()
 	fmt.Println(successStyle.Render(" usage:"))
-	fmt.Printf("    cat targets.txt | %s -target -\n", cmdStyle.Render("ceye"))
-	fmt.Printf("    %s -target %s -config %s -notify=%s\n", cmdStyle.Render("ceye"), argStyle.Render("example.com"), argStyle.Render("custom.yaml"), argStyle.Render("discord"))
-	fmt.Printf("    %s -target %s\n", cmdStyle.Render("ceye"), argStyle.Render("targets.txt"))
-	fmt.Printf("    echo \"@reboot %s %s -target %s > /tmp/ceye.log 2>&1 &\" | %s -\n\n", cmdStyle.Render("nohup"), cmdStyle.Render("ceye"), argStyle.Render("example.com"), cmdStyle.Render("crontab"))
+	fmt.Printf("    cat targets.txt | %s -target -\n", cmdStyle.Render("crtmon"))
+	fmt.Printf("    %s -target %s -config %s -notify=%s\n", cmdStyle.Render("crtmon"), argStyle.Render("example.com"), argStyle.Render("custom.yaml"), argStyle.Render("discord"))
+	fmt.Printf("    %s -target %s\n", cmdStyle.Render("crtmon"), argStyle.Render("targets.txt"))
+	fmt.Printf("    echo \"@reboot %s %s -target %s > /tmp/crtmon.log 2>&1 &\" | %s -\n\n", cmdStyle.Render("nohup"), cmdStyle.Render("crtmon"), argStyle.Render("example.com"), cmdStyle.Render("crontab"))
 
 	fmt.Println(successStyle.Render(" options:"))
 	fmt.Printf("    %s      target domain to monitor (file path, single domain, or '-' for stdin)\n", flagStyle.Render("-target"))
-	fmt.Printf("    %s      path to configuration file (default: ~/.config/ceye/provider.yaml)\n", flagStyle.Render("-config"))
+	fmt.Printf("    %s      path to configuration file (default: ~/.config/crtmon/provider.yaml)\n", flagStyle.Render("-config"))
 	fmt.Printf("    %s      notification provider: discord, telegram, both\n", flagStyle.Render("-notify"))
 	fmt.Printf("    %s     show version\n", flagStyle.Render("-version"))
 	fmt.Printf("    %s      update to latest version\n", flagStyle.Render("-update"))
 	fmt.Printf("    %s    show this help message\n\n", flagStyle.Render("-h, -help"))
 
 	fmt.Println(successStyle.Render(" configuration:"))
-	fmt.Printf("    %s config file location: ~/.config/ceye/provider.yaml\n", argStyle.Render("•"))
+	fmt.Printf("    %s config file location: ~/.config/crtmon/provider.yaml\n", argStyle.Render("•"))
 	fmt.Printf("    %s supports multiple targets and notification providers\n\n", argStyle.Render("•"))
 
 	fmt.Println(successStyle.Render(" requirements:"))

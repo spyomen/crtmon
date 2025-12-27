@@ -1,4 +1,4 @@
-module github.com/spyomen/crtmon
+module github.com/coffinxp/crtmon
 
 go 1.21
 

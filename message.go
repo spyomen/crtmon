@@ -16,10 +16,10 @@ func buildDiscordPayload(target string, domains []string) map[string]interface{}
 				"title":       fmt.Sprintf("%s  [%d]", target, len(domains)),
 				"description": fmt.Sprintf("```\n%s\n```", domainList),
 				"color":       2829617,
-				"author": map[string]string{
-					"name": "1hehaq/ceye",
-					"url":  "https://github.com/1hehaq/ceye",
-				},
+				// "author": map[string]string{
+				// 	"name": "1hehaq/ceye",
+				// 	"url":  "https://github.com/1hehaq/ceye",
+				// },
 				"timestamp": time.Now().Format(time.RFC3339),
 			},
 		},

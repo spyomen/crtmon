@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	containerName    = "ceye-certstream"
+	containerName    = "crtmon-certstream"
 	certstreamImage  = "0rickyy0/certstream-server-go:latest"
 	containerPort    = "8080"
 	hostPort         = "8888"

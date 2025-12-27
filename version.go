@@ -11,6 +11,6 @@ func displayVersion() {
 	dimStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("8"))
 
 	fmt.Println()
-	fmt.Printf("%s %s\n", highlightStyle.Render("ceye"), dimStyle.Render("v"+version))
+	fmt.Printf("%s %s\n", highlightStyle.Render("crtmon"), dimStyle.Render("v"+version))
 	fmt.Println()
 }

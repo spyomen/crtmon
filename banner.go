@@ -11,7 +11,7 @@ func printBanner() {
 ░█░░░█▀▄░░█░░█░█░█░█░█░█
 ░▀▀▀░▀░▀░░▀░░▀░▀░▀▀▀░▀░▀
 
-monitor your targets, hunt on fresh!
+monitor your targets, hunt fresh assets in real time!
 `
 	fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#cfff4aff")).Render(banner))
 }

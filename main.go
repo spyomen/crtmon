@@ -40,7 +40,6 @@ var (
 func main() {
 	flag.Parse()
 
-	// Check for unrecognized flags
 	if len(os.Args) > 1 {
 		validFlags := map[string]bool{
 			"-target": true, "-config": true, "-notify": true,
@@ -128,7 +127,7 @@ func main() {
 		logger.Info("using targets from stdin", "count", len(targets))
 	case cfg != nil:
 		if len(cfg.Targets) == 0 {
-			logger.Fatal("no targets configured. please add target domains to ~/.config/ceye/provider.yaml or use -target flag or stdin")
+			logger.Fatal("no targets configured. please add target domains to ~/.config/crtmon/provider.yaml or use -target flag or stdin")
 		}
 		targets = cfg.Targets
 		logger.Info("loaded configuration", "targets", len(targets))
@@ -200,7 +199,7 @@ func main() {
 		logger.Fatal("failed to start certstream server", "error", err)
 	}
 
-	logger.Info("starting ceye")
+	logger.Info("starting crtmon")
 	for i, t := range targets {
 		fmt.Printf("         %d. %s\n", (i + 1), t)
 	}

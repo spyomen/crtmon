@@ -26,7 +26,7 @@ func getConfigDir() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return filepath.Join(home, ".config", "ceye"), nil
+	return filepath.Join(home, ".config", "crtmon"), nil
 }
 
 func getConfigPath() (string, error) {
@@ -51,7 +51,7 @@ func createConfigTemplate() error {
 		return err
 	}
 
-	template := `# ceye configuration
+	template := `# crtmon configuration
 # monitor your targets real time via certificate transparency logs
 
 # discord webhook url for notifications
@@ -102,10 +102,10 @@ func configExists() bool {
 
 func validateConfig(cfg *Config) error {
 	if cfg.Webhook == "" || cfg.Webhook == `""` {
-		return fmt.Errorf("webhook not configured. please add your discord webhook url to ~/.config/ceye/provider.yaml")
+		return fmt.Errorf("webhook not configured. please add your discord webhook url to ~/.config/crtmon/provider.yaml")
 	}
 	if len(cfg.Targets) == 0 {
-		return fmt.Errorf("no targets configured. please add target domains to ~/.config/ceye/provider.yaml")
+		return fmt.Errorf("no targets configured. please add target domains to ~/.config/crtmon/provider.yaml")
 	}
 	return nil
 }
