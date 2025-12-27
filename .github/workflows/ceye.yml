@@ -1,0 +1,40 @@
+name: monitor 24/7
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: build
+        run: go build -o ceye .
+
+      - name: create config
+        run: |
+          mkdir -p ~/.config/ceye
+          cat > ~/.config/ceye/provider.yaml << EOF
+          targets:
+          EOF
+          
+          IFS=',' read -ra TARGET_ARRAY <<< "${{ secrets.TARGET }}"
+          for target in "${TARGET_ARRAY[@]}"; do
+            trimmed=$(echo "$target" | xargs)
+            if [ -n "$trimmed" ]; then
+              echo "  - $trimmed" >> ~/.config/ceye/provider.yaml
+            fi
+          done
+
+      - name: run ceye
+        run: |
+          timeout 6h ./ceye -webhook ${{ secrets.WEBHOOK }} || true
