@@ -22,7 +22,7 @@ var updateLogger = charmlog.NewWithOptions(os.Stderr, charmlog.Options{
 func performUpdate() {
 	printBanner()
 
-	latest, found, err := selfupdate.DetectLatest("coffinxp/crtmon")
+	latest, found, err := selfupdate.DetectLatest("spyomen/crtmon")
 	if err != nil {
 		printErr("failed to check for updates: " + err.Error())
 		os.Exit(1)
