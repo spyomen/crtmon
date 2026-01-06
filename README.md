@@ -1,114 +1,140 @@
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/8c9b1877-5803-4c2a-a4ce-f22d5c1a2445" alt="ceye" width="500">
-</div>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/39d6e99e-8281-4f48-811b-14478f25be99" alt="crtmon" width="600">
+  <img width="500" height="200" alt="credit" src="https://github.com/user-attachments/assets/23cc637e-0294-4eef-bc8e-ba8515b6f689" />
+</p>
 
+> [!NOTE]
+> **crtmon** is a lightweight Certificate Transparency monitoring tool that discovers new subdomains in real time as soon as they appear.
 
-<br>
-<br>
-<br>
+</br>
+</br>
 
+###  Features
 
-> [!NOTE] 
-> **ceye is a minimal tool for monitoring certificate transparency logs without any hassle.**
+* Real-time subdomain discovery from CT logs
+* Discord and Telegram notifications
+* Smart batching with built-in rate limiting
+* Supports single targets, files, and stdin
 
-<br>
+</br>
+</br>
 
-- <sub> **detects new subdomains for your targets** </sub>
-- <sub> **discord webhook notifications** </sub>
-- <sub> **caches seen domains to avoid duplicates** </sub>
-
-<br>
-<br>
-
-<h4>Installation</h4>
-
-```bash
-go install github.com/1hehaq/ceye@latest
-```
-
-<br>
-
-<h6>setup configuration</h6>
+###  Installation
 
 ```bash
-# create config directory and provider template
-ceye
+go install github.com/coffinxp/crtmon@latest
 ```
 
-- <sub>**edit the generated config file at `~/.config/ceye/provider.yaml`**</sub>
+</br>
+</br>
 
-<div align="center">
-  <img width="800" height="800" alt="image" src="https://github.com/user-attachments/assets/0e73cc08-46ec-4aa7-9da0-cf8e5fa0cf68" />
-</div>
+###  Configuration
 
-<br>
-<br>
-
-<h4>Flags</h4>
-
-<pre>
-  -target    : target domain to monitor (required if no config)
-  -webhook   : discord webhook URL (required if no config)
-  -version   : show version
-  -update    : update to latest version
-  -h, -help  : show help message
-</pre>
-
-<div align="center">
-  <!-- <img alt="help" src="https://github.com/user-attachments/assets/957f6a89-08e2-4943-b0de-cf7296997ec6" /> -->
-  <img alt="help" src="https://github.com/user-attachments/assets/a2302e5a-9024-48f7-935c-2e8465dd6aa0" />
-</div>
-
-
-<br>
-<br>
-
-<h4>Example Commands</h4>
+Run `crtmon` once to generate the default configuration template:
 
 ```bash
-# monitor github.com for new subdomains
-ceye -target github.com -webhook https://discord.com/api/webhooks/...
-
-# monitor multiple targets from config
-ceye # config: ~/.config/ceye/provider.yaml
+crtmon
 ```
 
-<br>
+Edit the generated file:
+
+```text
+~/.config/crtmon/provider.yaml
+```
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/183cb7ab-6e52-40c8-9362-118bf97a0c84" alt="provider" width="800">
+</p>
+
+</br>
+</br>
+
+###  Flags
+
+```text
+-target    target domain, file path, or '-' for stdin
+-config    path to configuration file (default: ~/.config/crtmon/provider.yaml)
+-notify    notification provider: discord, telegram, both
+-version   show version
+-update    update to latest version
+-h, -help  show help message
+```
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/52534768-1934-4f94-9a7b-95ca2b70980f" alt="help" width="1000">
+</p>
+
+</br>
+</br>
+
+###  Usage Examples
+
+- ###### Monitor a single target
 
 ```bash
-# get notified when companies add new subdomains
-ceye -target tesla.com
+crtmon -target github.com
 ```
 
-<br>
+- ###### Monitor targets from config file
 
 ```bash
-# setup cron job to start ceye on system reboot
-echo "@reboot ceye -target github.com -webhook YOUR_DISCORD_WEBHOOK" | crontab -
+crtmon # config: ~/.config/crtmon/provider.yaml
 ```
 
-<br>
-<br>
+- ###### Monitor multiple targets from a file
 
-- **If you see no results or errors**
-  - <sub> **verfiy your targets and webhook** </sub>
-  - <sub> **check your internet connection** </sub>
-  - <sub> **ensure docker is installed and running** </sub>
-  - <sub> **use `-h` for guidance** </sub>
+```bash
+crtmon -target targets.txt
+```
 
-<br>
-<br>
+- ###### Pipe targets via stdin
 
-> [!CAUTION] 
-> **never use `ceye` for any illegal activites, I'm not responsible for your deeds with it. Do for justice.**
+```bash
+cat domains.txt | crtmon -target -
+```
 
-<br>
-<br>
-<br>
+- ###### Use Telegram notifications only
 
-<h6 align="center">kindly for hackers</h6>
+```bash
+crtmon -target github.com -notify telegram
+```
 
-<div align="center">
-  <a href="https://github.com/1hehaq"><img src="https://img.icons8.com/material-outlined/20/808080/github.png" alt="GitHub"></a>
-  <a href="https://twitter.com/1hehaq"><img src="https://img.icons8.com/material-outlined/20/808080/twitter.png" alt="X"></a>
-</div></content>
+- ###### Dual notifications (Discord + Telegram)
+
+```bash
+echo -e "tesla.com\nuber.com\nmeta.com" | crtmon -target - -notify both
+```
+
+- ###### Start on system reboot (cron)
+
+```bash
+echo "@reboot nohup crtmon -target github.com > /tmp/crtmon.log 2>&1 &" | crontab -
+```
+
+</br>
+</br>
+
+> [!TIP]
+>
+> **If you see no output or errors:**
+>
+> - Verify your targets are valid  
+> - Double check notification credentials  
+> - Ensure Docker is installed and running  
+> - Check your internet connection  
+> - Run `crtmon -h` for guidance
+
+
+</br>
+</br>
+
+### TO-DO
+
+* [ ] Separate notification channels per target
+
+</br>
+</br>
+
+> [!CAUTION]
+> **Use crtmon only on assets you own or have permission to test.
+The authors are not responsible for misuse...**
